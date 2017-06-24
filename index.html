@@ -27,6 +27,9 @@
         socket.on('chat message', function(msg) {
             $('#messages').append($('<li>').text(msg));
         });
+        socket.on('current users', function(msg) {
+            $('#messages').append($('<li>').text(msg[0]));
+        });
     });
     </script>
     <title>Socket.IO chat</title>
