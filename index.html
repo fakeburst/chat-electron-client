@@ -3,6 +3,8 @@
 
 <head>
     <!-- Insert this line above script imports  -->
+	<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/chat.css" rel="stylesheet">
     <script>
     if (typeof module === 'object') {
         window.module = module;
@@ -20,7 +22,7 @@
     $(document).ready(function() {
         var socket = io.connect('http://localhost:3000');
         $('form').submit(function() {
-            socket.emit('chat message', $('#m').val());
+            socket.emit('chat message',$('#m').val());
             $('#m').val('');
             return false;
         });
@@ -30,53 +32,7 @@
     });
     </script>
     <title>Socket.IO chat</title>
-    <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    body {
-        font: 13px Helvetica, Arial;
-    }
-    
-    form {
-        background: #000;
-        padding: 3px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }
-    
-    form input {
-        border: 0;
-        padding: 10px;
-        width: 90%;
-        margin-right: .5%;
-    }
-    
-    form button {
-        width: 9%;
-        background: rgb(130, 224, 255);
-        border: none;
-        padding: 10px;
-    }
-    
-    #messages {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-    
-    #messages li {
-        padding: 5px 10px;
-    }
-    
-    #messages li:nth-child(odd) {
-        background: #eee;
-    }
-    </style>
+
 </head>
 
 <body>

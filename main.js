@@ -14,10 +14,10 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600})
-
+  //mainWindow.setMenu(null);
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
+    pathname: path.join(__dirname, 'login.html'),
     protocol: 'file:',
     slashes: true
   }))
@@ -54,6 +54,7 @@ app.on('activate', function () {
   if (mainWindow === null) {
     createWindow()
   }
+ 
 })
 
 // In this file you can include the rest of your app's specific main process
