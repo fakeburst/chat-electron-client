@@ -1,7 +1,10 @@
+var _ = require('underscore');
+
 $(document).ready(function() {
     var socket = io.connect('http://localhost:8080');
+    var username = localStorage.getItem("nickname");
 
-    socket.emit('logged', localStorage.getItem("nickname"));
+    socket.emit('logged', username);
 
     socket.on('current users', function(users) {
         for (var i = 0; i < users.length; i++) {
@@ -29,7 +32,21 @@ $(document).ready(function() {
         $('.username:contains(' + name + ')').remove();
     });
 
+    //TODO multiple users typing
+
     $("#m").keypress(function() {
-        console.log("Handler for .keypress() called.");
+        socket.emit('typing');
     });
+
+    socket.on('typing', function(name) {
+        $("#typing").html(name + " is typing");
+    })
+
+    $("#m").keyup(_.debounce(function(){
+        socket.emit('stop typing');
+    } , 1000));
+
+    socket.on('stop typing', function(name) {
+        $("#typing").html("");
+    })
 });
