@@ -1,16 +1,16 @@
 $(document).ready(function() {
-    var socket = io.connect('http://localhost:3000');
+    var socket = io.connect('http://localhost:8080');
 
     socket.emit('logged', localStorage.getItem("nickname"));
 
     socket.on('current users', function(users) {
         for (var i = 0; i < users.length; i++) {
-            $('#users').append($('<li>').html(users[i]));
+            $('#users').append($('<li class="username">').html(users[i]));
         }
     });
 
     socket.on('new user online', function(name) {
-        $('#users').append($('<li>').html(name));
+        $('#users').append($('<li class="username">').html(name));
     })
 
     $('form').submit(function() {
@@ -26,8 +26,10 @@ $(document).ready(function() {
     });
 
     socket.on('user disconnected', function(name) {
+        $('.username:contains(' + name + ')').remove();
+    });
 
-        // Remove disconnected user from list
-
+    $("#m").keypress(function() {
+        console.log("Handler for .keypress() called.");
     });
 });
