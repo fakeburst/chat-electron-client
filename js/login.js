@@ -5,7 +5,7 @@ $(document).ready(function() {
 
     $('#login').click(function() {
         console.log($('form').serialize());
-        $.post("http://localhost:3000/login", $('form').serialize())
+        $.post("http://localhost:8080/login", $('form').serialize())
             .done(function(data) {
                 alert("Data Loaded: " + JSON.stringify(data));
                 loginAction();
