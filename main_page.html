@@ -1,0 +1,174 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel='shortcut icon' type='image/x-icon' href='../favicon.ico' />
+
+    <title>Socket.IO chat</title>
+ 
+    <link href="Metro-UI-CSS/build/css/metro.css" rel="stylesheet">
+    <link href="Metro-UI-CSS/build/css/metro-icons.css" rel="stylesheet">
+    <link href="Metro-UI-CSS/build/css/metro-responsive.css" rel="stylesheet">
+	<link href="css/chat.css" rel="stylesheet">
+	
+    <script>
+    if (typeof module === 'object') {
+        window.module = module;
+        module = undefined;
+    }
+    </script>
+    <!-- normal script imports etc  -->
+    <script src="./js/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+
+	<script src="Metro-UI-CSS/build/js/metro.js"></script>
+	<script src="./js/metro-scroll.js"></script>
+	<script src="./js/main_page.js"></script>
+	<script src="./js/socket.js"></script>
+	  
+	<script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+	  
+    <!-- Insert this line after script imports -->
+    <script>
+    if (window.module) module = window.module;
+    </script>
+	
+
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+        }
+        .page-content {
+            padding-top: 3.125rem;
+            min-height: 100%;
+            height: 100%;
+        }
+        .table .input-control.checkbox {
+            line-height: 1;
+            min-height: 0;
+            height: auto;
+        }
+
+        @media screen and (max-width: 800px){
+            #cell-sidebar {
+                flex-basis: 52px;
+            }
+            #cell-content {
+                flex-basis: calc(100% - 52px);
+            }
+        }
+    </style>
+
+    <script>
+        function pushMessage(t){
+            var mes = 'Info|Implement independently';
+            $.Notify({
+                caption: mes.split("|")[0],
+                content: mes.split("|")[1],
+                type: t
+            });
+        }
+
+        $(function(){
+            $('.sidebar').on('click', 'li', function(){
+                if (!$(this).hasClass('active')) {
+                    $('.sidebar li').removeClass('active');
+                    $(this).addClass('active');
+                }
+            })
+        })
+    </script>
+</head>
+<body class="bg-steel">
+    <div class="app-bar fixed-top darcula" data-role="appbar">
+        <a class="app-bar-element branding">BrandName</a>
+        <span class="app-bar-divider"></span>
+        <ul class="app-bar-menu">
+            <li><a href="">Dashboard</a></li>
+            <li>
+                <a href="" class="dropdown-toggle">Project</a>
+                <ul class="d-menu" data-role="dropdown">
+                    <li><a href="">New project</a></li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="" class="dropdown-toggle">Reopen</a>
+                        <ul class="d-menu" data-role="dropdown">
+                            <li><a href="">Project 1</a></li>
+                            <li><a href="">Project 2</a></li>
+                            <li><a href="">Project 3</a></li>
+                            <li class="divider"></li>
+                            <li><a href="">Clear list</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="">Security</a></li>
+            <li><a href="">System</a></li>
+            <li>
+                <a href="" class="dropdown-toggle">Help</a>
+                <ul class="d-menu" data-role="dropdown">
+                    <li><a href="">ChatOn</a></li>
+                    <li><a href="">Community support</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">About</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="app-bar-element place-right">
+            <span class="dropdown-toggle" id="user_nickname"><span class="mif-cog"></span> User Name</span>
+            <div class="app-bar-drop-container padding10 place-right no-margin-top block-shadow fg-dark" data-role="dropdown" data-no-close="true" style="width: 220px">
+                <h2 class="text-light">Quick settings</h2>
+                <ul class="unstyled-list fg-dark">
+                    <li><a href="" class="fg-white1 fg-hover-yellow">Profile</a></li>
+                    <li><a href="" class="fg-white2 fg-hover-yellow">Security</a></li>
+                    <li><a href="" class="fg-white3 fg-hover-yellow">Exit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <div class="flex-grid " style="height: 100%;">
+            <div class="row" style="height: 100%">
+                <div class="cell size-x200" id="cell-sidebar" style="background-color: #71b1d1; height: 100%">
+                    <ul class="sidebar">
+
+                        <li><a href="#">
+                            <span class="mif-earth icon mif-3x"></span>
+                            <span class="title">Global Chat</span>
+                        </a></li>
+                       
+                    </ul>
+                </div>
+                <div class="cell auto-size padding20 bg-white" id="cell-content">
+				
+					<div style="width: 85%; height: 85%;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+							<ul id="messages"></ul>
+					</div>
+	
+					<div style="width: 85%; height: 10%;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+							<form action="" >
+								<input id="m" autocomplete="off" placeholder="Message" />
+							</form>
+					</div>
+					
+                </div>
+				
+				<div class="cell" style="background-color: #71b1d1; height: 100%; width: 100px;position: fixed; right: 0px">
+					<ul id="users">
+					</ul>
+                </div>
+            </div>
+        </div>
+		
+	
+
+               
+    </div>
+</body>
+</html>
