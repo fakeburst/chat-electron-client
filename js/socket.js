@@ -15,12 +15,13 @@ $(document).ready(function() {
 
     $('form').submit(function() {
         socket.emit('chat message', $('#m').val());
+		$('#messages').append($('<li>').html("<div id='textarea' class='msg user_msg' disabled readonly>" + $('#m').val() + "</div>"));
         $('#m').val('');
-        return false;
+		 return false;
     });
 
     socket.on('chat message', function(msg) {
-        $('#messages').append($('<li>').html("<textarea class='msg' disabled readonly>" + msg + "</textarea>"));
+        $('#messages').append($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly>" + msg + "</div>"));
         var list = document.getElementsByClassName("msg");
         autosize(list[list.length - 1]);
     });

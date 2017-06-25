@@ -55,20 +55,24 @@
     }
     
     #users li {
-        padding: 5px 10px;
+        padding: 15px 20px;
+	
     }
     
     #users li:nth-child(odd) {
-        background: #eee;
+        background: #485d09;
+
     }
 	
-	textarea {
-		resize: none;
-		border: 0px;
-		width: 100%;
+	#textarea {
 		
+	-moz-appearance: textfield-multiline;
+	-webkit-appearance: textarea;
+	resize: none;
+	border: 0px;
+	width: 100%;
 		
-		width:100%;
+	width:100%;
 	box-sizing:border-box;
 	direction:rtl;
 	display:block;
@@ -87,6 +91,27 @@
 	background:-moz-linear-gradient(#ffffff, #d9e2e5);
 	background:-webkit-linear-gradient(#ffffff, #d9e2e5);
 		
+	}
+	
+	.user_msg {
+		text-align: right;
+	}
+	
+	.other_msg {
+		text-align: left;
+	}
+	
+	.system_msg {
+		text-align: center;
+	}
+	
+	#typing {
+		background: rgba(110, 125, 123,0.5); 
+		
+		box-shadow: 0 0 20px rgba(110, 125, 123,1.0); /* Параметры тени */
+		width: 85%;
+		color: white;
+		padding: 0.5%;
 	}
 	
 	p {
