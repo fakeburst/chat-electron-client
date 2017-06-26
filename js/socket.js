@@ -1,7 +1,7 @@
 var _ = require('underscore');
 
 $(document).ready(function() {
-    var socket = io.connect('http://localhost:8080');
+    var socket = io.connect('https://chat-server1337.mybluemix.net');
     var username = localStorage.getItem("nickname");
 
     socket.emit('logged', username);
