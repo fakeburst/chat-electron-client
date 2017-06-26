@@ -83,4 +83,19 @@ $(document).ready(function() {
     socket.on('stop typing', function(name) {
         $("#" + name).remove();
     })
+
+    socket.on('load more', function(data) {
+        for (var i = 0; i < data.length; i++) {
+            if(data[i].username === username)
+                $('#messages').prepend($('<li>').html("<div id='textarea' class='msg user_msg' disabled readonly>" + data[i].content + "</div>"));
+            else
+                $('#messages').prepend($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly>" + data[i].content + "</div>"));
+        }
+    })
+
+    $('#exit').click(function(event) {
+        console.log("exit");
+        require('electron').remote.getCurrentWindow().close();
+        event.stopPropagation();
+    })
 });
