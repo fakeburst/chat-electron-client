@@ -1,0 +1,245 @@
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+	body {
+		color: #fff;
+	}
+
+	#typing {
+		position: absolute;
+		bottom: 65;
+		left: 12%;
+		
+	}
+	
+	.title {
+		text-align: center;
+		color: #fff;
+		display: inline-block;
+		padding-left: 10px;
+	}
+	
+	.upper {
+		font-size: 26;
+	}
+	
+	.bottom{
+		font-weight: bold;
+		font-size: 30;
+	}
+
+    
+    form input {
+		background: #000;    
+		color :	#fff;
+        border: 0;
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+		font:16px/26px Georgia, Garamond, Serif;
+		overflow:auto;
+    }
+	
+
+	
+	table {
+		width: 99.9%;
+		height: 99.9%;
+	}
+	
+	.topbar {
+		height: 10%;
+		width: 100%
+	}
+	
+	.main {
+		height: 85%;
+		width: 100%
+	}
+	
+	.botbar {
+		height: 50px;
+		width: 100%;
+		border: 1px solid #fff;
+	}
+	
+	.console {
+	}
+	
+	.servers {
+		border: 1px solid #fff;
+	}
+	
+	.messages {
+		border: 1px solid #fff;
+	}
+	
+	.users {
+		border: 1px solid #fff;
+		text-align: center;
+	}
+	
+	.icon {
+		padding-left: 15px;
+	}
+	
+	
+	input:focus,
+	select:focus,
+	textarea:focus,
+	button:focus {
+		outline: none;
+	}
+	
+	.cl1 {
+		width: 5%;
+	}
+	
+	.cl2 {
+		width: 10%;
+	}
+	
+	.cl8 {
+		width: 80%;
+	}
+	
+	
+	
+	
+	 #messages {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+		width: 100%;
+		background: #000;
+    }
+    
+    #messages li {
+        padding: 5px 10px;
+		
+    }
+    
+    #messages li:nth-child(odd) {
+        background: #000;
+    }
+	
+	 #users {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+		width: 100%;
+    }
+    
+    #users li {
+        padding: 15px 20px;
+	
+    }
+    
+    #users li:nth-child(odd) {
+        background: #000;
+
+    }
+	
+	#textarea {
+		
+	-moz-appearance: textfield-multiline;
+	-webkit-appearance: textarea;
+	resize: none;
+	border: 0px;
+	
+	box-sizing:border-box;
+	direction:rtl;
+	display:block;
+	max-width:100%;
+	line-height:1.5;
+	padding:15px 15px 30px;	
+	/*border-bottom:1px solid #6e7d7b;*/
+	font:16px Tahoma, cursive;
+	transition:box-shadow 0.5s ease;
+	box-shadow:0 4px 6px rgba(0,0,0,0.1);
+	background-color: #000;
+	font-smoothing:subpixel-antialiased;
+	word-break: break-all; 
+	word-wrap: break-word;
+	display: inline-block;
+	 border:2px gray solid; 
+	}
+	
+	.user_msg {
+		text-align: right;
+	}
+	
+	.other_msg {
+		text-align: left;
+	}
+	
+	.system_msg {
+		text-align: center;
+	}
+	
+	.load {
+	  background: #000;
+	
+	  -webkit-border-radius: 0;
+	  -moz-border-radius: 0;
+	  border-radius: 0px;
+	  font-family: Courier New;
+	  color: #fcfcfc;
+	  font-size: 20px;
+	  padding: 5x 10px 5px 10px;
+	  text-decoration: none;
+	  border: 0;
+	  -moz-text-shadow:0 0 20px #81adef;
+	-webkit-text-shadow:0 0 20px #81adef;
+	text-shadow:0 0 20px #81adef;
+	
+	}
+
+	.load:hover {
+	  background: #000000;
+	  
+	  text-decoration: none;
+	}
+	
+	h1{
+	 display: inline;   
+	
+	 font-size:20px;
+	 padding: 10px;
+	-moz-text-shadow:0 0 20px #81adef;
+	-webkit-text-shadow:0 0 20px #81adef;
+	text-shadow:0 0 20px #81adef;
+	}
+	
+.msg {
+    position: relative;
+}
+
+.msg span {
+   position: absolute;
+   top: -10;
+   left: 15;
+}
+	
+	::-webkit-scrollbar {
+      width: 15px;
+} 
+	
+::-webkit-scrollbar-track {
+      background-color: #000;
+} 
+ 
+::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.5); 
+} 
+ 
+::-webkit-scrollbar-button {
+      background-color: #000;
+} 
+ 
+::-webkit-scrollbar-corner {
+      background-color: black;
+}

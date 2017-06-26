@@ -21,7 +21,7 @@ function loginAction() {
 
     localStorage.setItem("nickname", $("input[name=user_login]").val());
 
-    window.location.replace("main_page.html");
+    window.location.replace("main_pageV2.html");
     event.preventDefault(); // disable normal form submit behavior
     return false; // prevent further bubbling of event
 }

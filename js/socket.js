@@ -20,16 +20,24 @@ $(document).ready(function() {
     socket.on('last messages', function(msgs) {
         console.log(msgs)
         for (var i = 0; i < msgs.length; i++) {
+			var kost = '';
+			for(var k = 0; k < msgs[i].username.length; k++){
+				kost = kost + '&nbsp';
+			}
             if(msgs[i].username === username)
-                $('#messages').append($('<li>').html("<div id='textarea' class='msg user_msg' disabled readonly>" + msgs[i].content + "</div>"));
+                $('#messages').append($('<li>').html("<div id='textarea' class='msg user_msg' disabled readonly><span class='nick'>"+msgs[i].username+"</span><h1>" + kost+ emoji.emojify(msgs[i].content) + "</h1></div>"));
             else
-                $('#messages').append($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly>" + msgs[i].content + "</div>"));
+                $('#messages').append($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly><span class='nick'>"+msgs[i].username+"</span><h1>" + kost + emoji.emojify(msgs[i].content) + "</h1></div>"));
         }
     })
 
     $('form').submit(function() {
+		var kost = ' ';
+			for(var k = 0; k < username.length; k++){
+				kost = kost + '&nbsp';
+			}
         socket.emit('chat message', $('#m').val());
-		var toSend = "<div id='textarea' class='msg user_msg' disabled readonly>" + emoji.emojify($('#m').val()) + "</div>";
+		var toSend = "<div id='textarea' class='msg user_msg' disabled readonly><span class='nick'>"+username+"</span> <h1>" + kost + emoji.emojify($('#m').val()) + "</h1></div>";
 		
 		$('#messages').append($('<li>').html(toSend));
         $('#m').val('');
@@ -37,8 +45,12 @@ $(document).ready(function() {
     });
 
     socket.on('chat message', function(msg) {
-		var toShow = emoji.emojify(msg.message);
-        $('#messages').append($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly>" + toShow + "</div>"));
+		var kost = ' ';
+			for(var k = 0; k < msg.username.length; k++){
+				kost = kost + '&nbsp';
+			}
+		var toShow = kost+emoji.emojify(msg.message);
+        $('#messages').append($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly><span class='nick'>"+msg.username+"</span><h1>" + toShow + "</h1></div>"));
         var list = document.getElementsByClassName("msg");
         autosize(list[list.length - 1]);
     });
@@ -52,8 +64,10 @@ $(document).ready(function() {
     var typing = false;
 
     $("#m").keypress(function() {
-        if (!typing)
+		
+        if (!typing){
             socket.emit('typing');
+		}
         typing = true;
     });
 
