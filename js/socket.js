@@ -85,11 +85,19 @@ $(document).ready(function() {
     })
 
     socket.on('load more', function(data) {
+		console.log(data);
         for (var i = 0; i < data.length; i++) {
+			
+			var kost = ' ';
+			for(var k = 0; k < data.username.length; k++){
+				kost = kost + '&nbsp';
+			}
+			var toShow = kost+emoji.emojify(data.message);
+			
             if(data[i].username === username)
-                $('#messages').prepend($('<li>').html("<div id='textarea' class='msg user_msg' disabled readonly>" + data[i].content + "</div>"));
+                $('#messages').prepend($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly><span class='nick'>"+data.username+"</span><h1>" + toShow + "</h1></div>"));
             else
-                $('#messages').prepend($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly>" + data[i].content + "</div>"));
+                $('#messages').prepend($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly><span class='nick'>"+data.username+"</span><h1>" + toShow + "</h1></div>"));
         }
     })
 
@@ -97,5 +105,10 @@ $(document).ready(function() {
         console.log("exit");
         require('electron').remote.getCurrentWindow().close();
         event.stopPropagation();
-    })
+    });
+	
+	 $('.load').click(function() {
+		 console.log('tap');
+		socket.emit('load more');
+	 });
 });
