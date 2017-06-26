@@ -29,13 +29,16 @@ $(document).ready(function() {
 
     $('form').submit(function() {
         socket.emit('chat message', $('#m').val());
-        $('#messages').append($('<li>').html("<div id='textarea' class='msg user_msg' disabled readonly>" + $('#m').val() + "</div>"));
+		var toSend = "<div id='textarea' class='msg user_msg' disabled readonly>" + emoji.emojify($('#m').val()) + "</div>";
+		
+		$('#messages').append($('<li>').html(toSend));
         $('#m').val('');
         return false;
     });
 
     socket.on('chat message', function(msg) {
-        $('#messages').append($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly>" + msg.message + "</div>"));
+		var toShow = emoji.emojify(msg.message);
+        $('#messages').append($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly>" + toShow + "</div>"));
         var list = document.getElementsByClassName("msg");
         autosize(list[list.length - 1]);
     });
