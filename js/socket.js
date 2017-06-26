@@ -1,6 +1,7 @@
 var _ = require('underscore');
 
 $(document).ready(function() {
+    //var socket = io.connect('https://chat-server1337.mybluemix.net');
     var socket = io.connect('http://localhost:8080');
     var username = localStorage.getItem("nickname");
 
@@ -16,17 +17,27 @@ $(document).ready(function() {
         $('#users').append($('<li class="username">').html(name));
     })
 
+    socket.on('last messages', function(msgs) {
+        console.log(msgs)
+        for (var i = 0; i < msgs.length; i++) {
+            if(msgs[i].username === username)
+                $('#messages').append($('<li>').html("<div id='textarea' class='msg user_msg' disabled readonly>" + msgs[i].content + "</div>"));
+            else
+                $('#messages').append($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly>" + msgs[i].content + "</div>"));
+        }
+    })
+
     $('form').submit(function() {
         socket.emit('chat message', $('#m').val());
 		var toSend = "<div id='textarea' class='msg user_msg' disabled readonly>" + emoji.emojify($('#m').val()) + "</div>";
 		
 		$('#messages').append($('<li>').html(toSend));
         $('#m').val('');
-		 return false;
+        return false;
     });
 
     socket.on('chat message', function(msg) {
-		var toShow = emoji.emojify(msg);
+		var toShow = emoji.emojify(msg.message);
         $('#messages').append($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly>" + toShow + "</div>"));
         var list = document.getElementsByClassName("msg");
         autosize(list[list.length - 1]);
@@ -38,19 +49,24 @@ $(document).ready(function() {
 
     //TODO multiple users typing
 
+    var typing = false;
+
     $("#m").keypress(function() {
-        socket.emit('typing');
+        if (!typing)
+            socket.emit('typing');
+        typing = true;
     });
 
     socket.on('typing', function(name) {
-        $("#typing").html(name + " is typing");
+        $("#typing").append('<div id="' + name + '">' + name + ' is typing</div>');
     })
 
-    $("#m").keyup(_.debounce(function(){
+    $("#m").keyup(_.debounce(function() {
         socket.emit('stop typing');
-    } , 1000));
+        typing = false;
+    }, 1000));
 
     socket.on('stop typing', function(name) {
-        $("#typing").html("");
+        $("#" + name).remove();
     })
 });

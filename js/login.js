@@ -4,10 +4,12 @@ $(document).ready(function() {
     }
 
     $('#login').click(function() {
-        console.log($('form').serialize());
         $.post("http://localhost:8080/login", $('form').serialize())
             .done(function(data) {
-                alert("Data Loaded: " + JSON.stringify(data));
+                if(!data.success){
+                    alert(data.msg, "Error");
+                    return;
+                }
                 loginAction();
             });
         return false;
