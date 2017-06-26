@@ -1,3 +1,4 @@
+var emoji = require('node-emoji');
 
 	$(function(){
 		$("#scrollbox1").scrollbar({
