@@ -1,6 +1,8 @@
 var _ = require('underscore');
 
 $(document).ready(function() {
+	var audio = new Audio('./sounds/sound_01.mp3');
+	
     //var socket = io.connect('https://chat-server1337.mybluemix.net');
     var socket = io.connect('http://localhost:8080');
     var username = localStorage.getItem("nickname");
@@ -60,6 +62,8 @@ $(document).ready(function() {
         autosize(list[list.length - 1]);
 		var elem = document.getElementById('scroll');
 		elem.scrollTop = elem.scrollHeight;
+		
+		audio.play();
     });
 
     socket.on('user disconnected', function(name) {
