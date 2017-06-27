@@ -14,6 +14,12 @@ $(document).ready(function() {
             });
         return false;
     })
+	
+	$('#register').click(function() {
+		window.location.replace("register.html");
+		event.preventDefault(); // disable normal form submit behavior
+        return false;
+    })
 });
 
 

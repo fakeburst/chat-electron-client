@@ -78,13 +78,16 @@
 								Load more
 							</button>
 					</div>
-					<div style="width: 100%; height: 90%;border:1px solid #000;background-color: #000;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+					<div id='scroll' style="width: 100%; height: 90%;border:1px solid #000;background-color: #000;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 							<ul id="messages"></ul>
 					</div>
 					<div id="typing"></div>
 				</td>
 				<td class="users" colspan="2">
 					<div style="width: 100%; height: 100%;border:1px solid #000;background-color: #000;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+						<div>
+							<h1>Online</h1>
+						</div>
 						<ul id="users"></ul>
 					</div>
 				</td>
@@ -95,7 +98,7 @@
 				</td>
 				<td class="console" colspan="3">
 					<form action="" >
-						<input type="text" placeholder="Message" autocomplete="off" id="m"></input>
+						<input type="text" placeholder="Message" autocomplete="off" id="m" required='true'></input>
 					</form>
 				</td>
 				<td colspan="1">

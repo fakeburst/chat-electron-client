@@ -29,6 +29,9 @@ $(document).ready(function() {
             else
                 $('#messages').append($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly><span class='nick'>"+msgs[i].username+"</span><h1>" + kost + emoji.emojify(msgs[i].content) + "</h1></div>"));
         }
+		
+		var elem = document.getElementById('scroll');
+		elem.scrollTop = elem.scrollHeight;
     })
 
     $('form').submit(function() {
@@ -41,6 +44,8 @@ $(document).ready(function() {
 		
 		$('#messages').append($('<li>').html(toSend));
         $('#m').val('');
+		var elem = document.getElementById('scroll');
+		elem.scrollTop = elem.scrollHeight;
         return false;
     });
 
@@ -53,6 +58,8 @@ $(document).ready(function() {
         $('#messages').append($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly><span class='nick'>"+msg.username+"</span><h1>" + toShow + "</h1></div>"));
         var list = document.getElementsByClassName("msg");
         autosize(list[list.length - 1]);
+		var elem = document.getElementById('scroll');
+		elem.scrollTop = elem.scrollHeight;
     });
 
     socket.on('user disconnected', function(name) {
@@ -103,6 +110,9 @@ $(document).ready(function() {
             else
                 $('#messages').prepend($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly><span class='nick'>"+data[i].username+"</span><h1>" + toShow + "</h1></div>"));
         }
+		
+		var elem = document.getElementById('scroll');
+		elem.scrollTop = elem.scrollHeight;
     })
 
     $('#exit').click(function(event) {
