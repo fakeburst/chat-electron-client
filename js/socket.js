@@ -86,18 +86,22 @@ $(document).ready(function() {
 
     socket.on('load more', function(data) {
 		console.log(data);
-        for (var i = 0; i < data.length; i++) {
+        if(data === "Already all messages"){
+            $('#messages').prepend($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly><span class='nick'>SYSTEM</span><h1>" + data + "</h1></div>"));
+            return;
+        }
+        for (var i = data.length - 1; i >= 0; i--) {
 			
 			var kost = ' ';
-			for(var k = 0; k < data.username.length; k++){
+			for(var k = 0; k < data[i].username.length; k++){
 				kost = kost + '&nbsp';
 			}
-			var toShow = kost+emoji.emojify(data.message);
+			var toShow = kost+emoji.emojify(data[i].content);
 			
             if(data[i].username === username)
-                $('#messages').prepend($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly><span class='nick'>"+data.username+"</span><h1>" + toShow + "</h1></div>"));
+                $('#messages').prepend($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly><span class='nick'>"+data[i].username+"</span><h1>" + toShow + "</h1></div>"));
             else
-                $('#messages').prepend($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly><span class='nick'>"+data.username+"</span><h1>" + toShow + "</h1></div>"));
+                $('#messages').prepend($('<li>').html("<div id='textarea' class='msg other_msg' disabled readonly><span class='nick'>"+data[i].username+"</span><h1>" + toShow + "</h1></div>"));
         }
     })
 
