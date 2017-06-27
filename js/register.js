@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     $('#register').click(function() {
-        $.post("http://localhost:8080/login", $('form').serialize())
+        $.post("http://localhost:8080/register", $('form').serialize())
             .done(function(data) {
                 if (!data.success) {
                     alert(data.msg, "Error");
